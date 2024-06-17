@@ -34,3 +34,13 @@ TEST(DummyTest2, test)
     EXPECT_EQ(dummy.run(), 2);
 }
 
+// sample test 2
+TEST(DummyTest3, test)
+{
+    ToolMock toolMock;
+    Dummy dummy(&toolMock);
+
+    EXPECT_CALL(toolMock, f(10)).WillRepeatedly(Return(-42));
+
+    EXPECT_EQ(dummy.run(), 2);
+}
