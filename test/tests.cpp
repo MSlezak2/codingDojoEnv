@@ -1,46 +1,23 @@
-
-#include "Dummy.h"
+#include "snail.h"
 
 #include <gtest/gtest.h>
-#include <gmock/gmock.h>
 
-using ::testing::Return;
+#include <vector>
 
-class ToolMock : public ToolInterface
-{
-public:
-    MOCK_METHOD(int, f, (int));
+extern std::vector<int> snail(const std::vector<std::vector<int>> &snail_map);
+
+class SampleTests : public ::testing::Test {
+protected:
+    void TestSnail(const std::vector<std::vector<int>>& input, const std::vector<int>& expected) {
+        std::vector<int> result = snail(input);
+        EXPECT_EQ(result, expected);
+    }
 };
 
-// sample test 1
-TEST(DummyTest1, test)
-{  
-    ToolMock toolMock;
-    Dummy dummy(&toolMock);
-
-    EXPECT_CALL(toolMock, f(10)).WillRepeatedly(Return(42));
-
-    EXPECT_EQ(dummy.run(), 1);
-}
-
-// sample test 2
-TEST(DummyTest2, test)
-{
-    ToolMock toolMock;
-    Dummy dummy(&toolMock);
-
-    EXPECT_CALL(toolMock, f(10)).WillRepeatedly(Return(-42));
-
-    EXPECT_EQ(dummy.run(), 2);
-}
-
-// sample test 2
-TEST(DummyTest3, test)
-{
-    ToolMock toolMock;
-    Dummy dummy(&toolMock);
-
-    EXPECT_CALL(toolMock, f(10)).WillRepeatedly(Return(-42));
-
-    EXPECT_EQ(dummy.run(), 2);
+TEST_F(SampleTests, Tests) {
+    TestSnail({{}}, {});
+    TestSnail({{1}}, {1});
+    TestSnail({{1,2}, {4,3}}, {1,2,3,4});
+    TestSnail({{1,2,3}, {8,9,4}, {7,6,5}}, {1,2,3,4,5,6,7,8,9});
+    TestSnail({{1,2,3,4}, {12,13,14,5}, {11,16,15,6}, {10,9,8,7}}, {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16});
 }

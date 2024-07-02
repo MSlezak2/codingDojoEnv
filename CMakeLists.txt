@@ -22,14 +22,13 @@ set(TEST_PROGRAM_NAME tests)
 add_executable(
     ${MAIN_PROGRAM_NAME}
     src/main.cpp
-    src/Tool.cpp
-    src/Dummy.cpp
+    src/snail.cpp
 )
 
 add_executable(
   ${TEST_PROGRAM_NAME}
   test/tests.cpp
-  src/Dummy.cpp
+  src/snail.cpp
 )
 
 target_include_directories(
