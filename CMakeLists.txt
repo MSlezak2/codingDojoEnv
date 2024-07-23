@@ -16,7 +16,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-set(MAIN_PROGRAM_NAME dummyprogram)
+set(MAIN_PROGRAM_NAME run_program)
 set(TEST_PROGRAM_NAME tests)
 
 add_executable(
